@@ -1,0 +1,100 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $block->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null);
+    if ($featuredImage = $_post->getFeaturedImage()) {
+        $background_img = ' style="background: url('.$block->escapeUrl($featuredImage).') center no-repeat; background-size: cover"';
+    }
+?>
+<div class="post-view <?= /* @noEscape */ $_post->getFeaturedImage() ? ' has-thumb' : '' ?>">
+    <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+        <div class="post-header" <?= $background_img ?>>
+            <div class="post-ftimg-hld">
+                <h1 class="post-title"><?php echo $_post->getTitle(); ?></h1>
+                <div class="post-info">
+                    <?php if ($_post->isPublishDateEnabled()) { ?> 
+                        <div class="item post-posed-date">
+                            <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                        </div>
+                    <?php } ?>
+                    <div class="category-comment">
+                        <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                            <div class="item post-categories">
+                                <span class="label"><?= $escaper->escapeHtml(__('In')) ?> </span>
+                                <?php $n = 0; ?>
+                                <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                                    <?php $n++; ?>
+                                    <a title="<?= $block->escapeHtml($ct->getTitle()) ?>"
+                                        href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                                    ><?= $block->escapeHtml($ct->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_categoriesCount) ? ',' : '' ?>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
+                            <div class="item post-comments">
+                                <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
+                                href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
+                                ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
+                                <span class="label"> <?= $escaper->escapeHtml(__('Comments')) ?></span>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-content">
+            <div class="post-description clearfix">
+                <div class="post-text-hld">
+                    <?= /*@noEscape*/ $block->getContent() ?>
+                    <div class="clear clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="post-tag-comment">
+            <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                <div class="item post-tags">
+                    <div class="mf-blog-icon mfbi-tags"></div>
+                    <?php $n = 0; ?>
+                    <?php foreach ($_post->getRelatedTags() as $tag) { ?>
+                        <?php $n++; ?>
+                        <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
+                        href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
+                        ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= ($n != $_tagsCount) ? ',' : '' ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+             <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
+                <div class="item post-comments">
+                    <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
+                    href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
+                    ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
+                    <span class="label"><?= $block->escapeHtml(__('Comments')) ?></span>
+                </div>
+            <?php } ?>
+        </div>    
+        <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
+            <a class="addthis_button_facebook"></a>
+            <a class="addthis_button_twitter"></a>
+            <a class="addthis_button_email"></a>
+            <a class="addthis_button_compact"></a>
+        </div>              
+    </div>
+    <div class="post-bottom">
+        <?= $block->getChildHtml('blog.post.bottom') ?>
+    </div>
+</div>

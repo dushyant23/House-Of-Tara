@@ -1,0 +1,67 @@
+<?php
+$_product = $block->getProduct();
+?>
+ 
+
+
+<div class="row singleProductRestInfo" id="element">
+                <div class="accordion" id="accordionTara">
+                    
+                     <?php $product_highlights = $_product->getData('product_highlights');
+                                    if(!empty($product_highlights)){ ?>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="productHighlight" data-role="collapsible">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-role="trigger" data-bs-target="#collapseHighlight" aria-expanded="true" aria-controls="collapseHighlight">
+                                                    Product Highlights
+                                                </button>
+                                            </h2>
+                                            <div id="collapseHighlight" data-role="content" class="accordion-collapse collapse show" aria-labelledby="productHighlight" data-bs-parent="#accordionTara">
+                                                <div class="accordion-body" >
+                                                    <?php echo $product_highlights; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php  } ?>
+                    <?php $product_detail = $_product->getData('product_detail');
+                                    if(!empty($product_detail)){ ?>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="productDetail"  data-role="collapsible">
+                            <button class="accordion-button collapsed" type="button" data-role="trigger" data-bs-toggle="collapse" data-bs-target="#collapseDetail" aria-expanded="false" aria-controls="collapseDetail">
+                                Product Details
+                            </button>
+                        </h2>
+                        <div id="collapseDetail" data-role="content" class="accordion-collapse collapse" aria-labelledby="productDetail" data-bs-parent="#accordionTara">
+                            <div class="accordion-body">
+                                 <?php echo $product_detail; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php  } ?>
+                    <?php $disclaimer = $_product->getData('disclaimer');
+                                    if(!empty($disclaimer)){ ?>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="disclaimer"  data-role="collapsible">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-role="trigger" data-bs-target="#collapseDisclaimer" aria-expanded="false" aria-controls="collapseDisclaimer">
+                                Disclaimer
+                            </button>
+                        </h2>
+                        <div id="collapseDisclaimer" data-role="content" class="accordion-collapse collapse" aria-labelledby="disclaimer" data-bs-parent="#accordionTara">
+                            <div class="accordion-body">
+                                  <?php echo $disclaimer; ?>
+                            </div>
+                        </div>
+                    </div>
+                     <?php  } ?>
+                    
+                </div>
+            </div>
+
+
+<script>
+    require([
+        'jquery',
+        'accordion'], function ($) {
+        $("#element").accordion();
+    });
+</script>
+

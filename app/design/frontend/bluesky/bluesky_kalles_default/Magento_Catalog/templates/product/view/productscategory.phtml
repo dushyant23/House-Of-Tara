@@ -1,0 +1,26 @@
+<?php 
+$_helper = $this->helper('Blueskytechco\Themeoption\Helper\Product');
+$rootCategoryId = $_helper->getRootCategoryId();
+$product = $block->getProduct();
+$categories = $product->getCategoryIds();
+echo '<label>'.__('Categories: ').'</label>';
+foreach($categories as $key=>$category){
+    $cat = $_helper->loadCategoryById($category);
+    if (!$cat->getIsActive() || $cat->getId() == $rootCategoryId) {
+        continue;
+    }
+    echo '<a href="'.$cat->getUrl().'">'.$cat->getName().'</a>';
+    if($key == 2){
+		break;
+	}
+}
+?>
+<div class="product-share-links">
+	<div class="share-links"><a href="#" class="share-links-click"><?= __('share') ?></a></div>
+	<div class="share-dialog">
+		<a href="#" class="my-tooltip-top" onclick=" window.open( 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-facebook-f"><span class="text tooltip-content no-wrap"><?= $block->escapeHtmlAttr(__('Facebook')) ?></span></span></a>
+		<a href="#" class="my-tooltip-top" onclick=" window.open( 'http://twitter.com/home/?status='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-twitter"><span class="text tooltip-content no-wrap"><?= $block->escapeHtmlAttr(__('Twitter')) ?></span></span></a>
+		<a href="#" class="my-tooltip-top" onclick=" window.open( 'http://pinterest.com/pin/create/button/?url='+encodeURIComponent(location.href), 'pinterest-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-pinterest"><span class="text tooltip-content no-wrap"><?= $block->escapeHtmlAttr(__('Pinterest')) ?></span></span></a>
+		<a href="#" class="my-tooltip-top" onclick=" window.open( 'https://plus.google.com/share?url='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-google"><span class="text tooltip-content no-wrap"><?= $block->escapeHtmlAttr(__('Google')) ?></span></span></a>
+	</div>
+</div> 

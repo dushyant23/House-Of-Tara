@@ -1,0 +1,49 @@
+<?php $_product = \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Framework\Registry::class)->registry('product');?>
+<div class="product-share">
+  <div class="share-links">
+    <a href="https://www.facebook.com/sharer.php?u=<?php echo $_product->getProductUrl();?>" target="_blank" rel="nofollow" data-tooltip="" data-placement="bottom" title="" class="share-facebook" data-original-title="Facebook">Facebook</a>
+		<a href="https://twitter.com/intent/tweet?text=<?php echo $_product->getName();?>&amp;url=<?php echo $_product->getProductUrl();?>" target="_blank" rel="nofollow" data-tooltip="" data-placement="bottom" title="" class="share-twitter" data-original-title="Twitter">Twitter</a>
+		<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $_product->getProductUrl();?>&amp;title=<?php echo $_product->getName();?>" target="_blank" rel="nofollow" data-tooltip="" data-placement="bottom" title="" class="share-linkedin" data-original-title="LinkedIn">LinkedIn</a>
+		<a href="https://plus.google.com/share?url=<?php echo $_product->getProductUrl();?>" target="_blank" rel="nofollow" data-tooltip="" data-placement="bottom" title="" class="share-googleplus" data-original-title="Google +">Google +</a>
+		<a href="mailto:?subject=<?php echo $_product->getName();?>&amp;body=<?php echo $_product->getProductUrl();?>" target="_blank" rel="nofollow" data-tooltip="" data-placement="bottom" title="" class="share-email" data-original-title="Email">Email</a>
+	</div>
+</div>
+<div class="row singleProductRestInfo" id="element">
+    <div class="accordion" id="accordionTara">
+		<div data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+			<?php $product_highlights = $_product->getData('product_highlights');
+            if(!empty($product_highlights)){ ?>	
+			<div data-role="collapsible">
+				<div data-role="trigger">
+					Product Highlights
+				</div>
+			</div>
+			<div data-role="content">
+				<?php echo $product_highlights; ?>
+			</div>
+			<?php  } ?>
+			<?php $product_detail = $_product->getData('product_detail');
+            if(!empty($product_detail)){ ?>
+			<div data-role="collapsible">
+				<div data-role="trigger">
+				Product Details
+				</div>
+			</div>
+			<div data-role="content">
+			<?php echo $product_detail; ?>
+			</div>
+			<?php  } ?>
+			<?php $disclaimer = $_product->getData('disclaimer');
+            if(!empty($disclaimer)){ ?>
+			<div data-role="collapsible">
+				<div data-role="trigger">
+				Disclaimer
+				</div>
+			</div>
+			<div data-role="content">
+			<?php echo $disclaimer; ?>
+			</div>
+			<?php  } ?>
+		</div>
+	</div>
+</div>

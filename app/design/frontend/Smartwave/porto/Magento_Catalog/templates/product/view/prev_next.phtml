@@ -1,0 +1,16 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+    $collection = $productCollection->addAttributeToSelect('*')->setPageSize(4)->load();
+    $helperImport = $objectManager->get('\Magento\Catalog\Helper\Image');
+    foreach ($collection as $product){ 
+    $imageUrl = $helperImport->init($product, 'product_page_image_small')->setImageFile($product->getSmallImage())->resize(120)->getUrl();    
+    ?>
+    <div class="product-nav product-prev">
+        <div class="product-pop">
+            <img class="product-image" src="<?php echo $imageUrl; ?>" alt="<?php echo $product->getName(); ?>"/>
+            <h3 class="product-name"><?php echo $product->getName(); ?></h3>
+        </div>
+    </div>
+<?php } ?>
+
