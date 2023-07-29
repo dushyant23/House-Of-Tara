@@ -1,0 +1,132 @@
+<?php
+$helper = $this->helper('Blueskytechco\RokanBase\Helper\Data');
+$description = $helper->getConfigData('themeoption/bloggeneral/description');
+$blog_see_all = $helper->getConfigData('themeoption/bloggeneral/blog_see_all');
+$items = $helper->getConfigData('themeoption/bloggeneral/blog_items');
+$items_bigdesktop = $helper->getConfigData('themeoption/bloggeneral/blog_items_bigdesktop');
+$items_smalldesktop = $helper->getConfigData('themeoption/bloggeneral/blog_items_smalldesktop');
+$items_bigtablet = $helper->getConfigData('themeoption/bloggeneral/blog_items_bigtablet');
+$items_tablet = $helper->getConfigData('themeoption/bloggeneral/blog_items_tablet');
+$items_smalltablet = $helper->getConfigData('themeoption/bloggeneral/blog_items_smalltablet');
+$items_mobile = $helper->getConfigData('themeoption/bloggeneral/blog_items_mobile');
+$auto = $helper->getConfigData('themeoption/bloggeneral/blog_auto') ? 'true' : 'false';
+$autoplayhoverpause = $helper->getConfigData('themeoption/bloggeneral/blog_autoplayhoverpause') ? 'true' : 'false';
+$rewind = $helper->getConfigData('themeoption/bloggeneral/blog_rewind') ? 'true' : 'false';
+$nav = $helper->getConfigData('themeoption/bloggeneral/blog_nav') ? 'true' : 'false';
+$margin = $helper->getConfigData('themeoption/bloggeneral/blog_margin');
+?>
+
+<?php if ($block->displayPosts()) { ?>
+    <?php $postCollection = $block->getPostCollection(); ?>
+    <?php if (count($postCollection)) { ?>
+    <div class="mfblog-replated-posts-block block related post-list-wrapper">
+        <?php if (!$block->getHideTitle()) { ?>
+        <div class="title rokan-title">
+            <h3 class="module-title">
+                <span id="block-relatedposts-heading" role="heading" aria-level="2">
+                    <?= $block->escapeHtml(__('Related Posts')) ?>
+                </span>
+            </h3>
+        </div>
+        <?php } ?>
+        <ul class="post-list slick-slider" data-rtl="false" data-items="<?php echo $items; ?>" 
+			data-bigdesktop="<?php echo $items_bigdesktop; ?>" data-smalldesktop="<?php echo $items_smalldesktop; ?>" 
+			data-bigtablet="<?php echo $items_bigtablet; ?>" data-tablet="<?php echo $items_tablet; ?>" 
+			data-smalltablet="<?php echo $items_smalltablet; ?>" data-mobile="<?php echo $items_mobile; ?>" 
+			data-margin="<?php echo $margin; ?>" data-loop="true" data-center="false" data-mousedrag="true" data-touchdrag="true" data-stagepadding="0" 
+			data-nav="<?php echo $nav; ?>" data-navnext="" data-navprev="" data-rewind="false" data-dots="true" data-autoplay="<?php echo $auto; ?>" data-speed="250">
+                <?php foreach ($postCollection as $post) { ?>
+                <li class="post-holder">
+                    <div class="post-header">
+                        <?php if ($featuredImage = $post->getFeaturedImage()) { ?>
+                            <?php
+                            $featuredImgAlt = $post->getData('featured_img_alt');
+                            if (!$featuredImgAlt) {
+                                $featuredImgAlt = $postName;
+                            }
+                            ?>
+                            <div class="post-ftimg-hld">
+                                <a href="<?= $block->escapeUrl($post->getPostUrl()) ?>" title="<?= $block->escapeHtml($post->getTitle()) ?>">
+                                    <img src="<?= $block->escapeUrl($featuredImage) ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                </a>
+                            </div>
+                        <?php } ?>
+                        <div class="post-title">
+                            <a class="post-item-link" title="<?= $block->escapeHtml($post->getTitle()) ?>"
+                                href="<?= $block->escapeUrl($post->getPostUrl()) ?>">
+                                    <?= $block->escapeHtml($post->getTitle()) ?>
+                            </a>
+                        </div>
+                        <div class="post-info">
+                            <?php if ($post->isPublishDateEnabled()) { ?>
+                                <div class="item post-posed-date">
+                                    <span class="value"><?= $block->escapeHtml($post->getPublishDate()) ?></span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <script> 
+        require([
+            'jquery',
+            'slick'
+            ], function ($) {
+            'use strict';
+            $(document).ready(function() {
+                var $carouselElement = $('.related .post-list'),
+                slickConfig = {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    rows: 1,
+                    autoplay: false,
+                    autoplaySpeed: false,
+                    arrows: true,
+                    dots: false,
+                    responsive: [
+                    {
+                        breakpoint: 1400,
+                        settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 2
+                        }
+                    }
+                    ]
+                };
+                $carouselElement.slick(slickConfig);
+            });
+        });
+    </script>
+    <?php } ?>
+<?php } ?>
+

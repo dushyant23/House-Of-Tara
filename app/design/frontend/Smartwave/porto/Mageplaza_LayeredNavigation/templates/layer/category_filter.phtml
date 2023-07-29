@@ -1,0 +1,46 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category'); //Get Current Category
+//Get current store
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$currentStore = $storeManager->getStore();
+// Get current store's categories
+$categoryCollection = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory');
+$storeCategories = $categoryCollection->create();
+$storeCategories->addAttributeToSelect('*')->addAttributeToFilter('is_active', 1)->setStore($currentStore);
+$catalogHelperData = $this->helper('Magento\Catalog\Helper\Data');
+$categoryObject = $catalogHelperData->getCategory();
+$categoryId = $categoryObject->getId();
+$categoryName = $categoryObject->getName();
+?>
+
+<?php 
+if ($storeCategories && count($storeCategories) > 0) { ?>
+<div class="block-category-list">
+    <div class="block-title">
+        <strong>Product Type</strong>
+    </div>
+    <div class="block-content">
+       
+        <ol class="items">
+        <?php
+       foreach ($storeCategories as $category) {
+            if($category->getName() == $categoryName){ ?>
+                     <strong><?php echo $categoryName; ?></strong>
+            <?php  }else{ ?>
+                <li class="item">
+                    <a class="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>"><?php echo $category->getName() ?></a>
+                </li>
+           <?php } }
+        ?>
+        </ol>
+    </div>
+    <script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+        $("#layered-filter-block").before($(".block.block-category-list"));
+    });
+    </script>
+</div>
+<?php } ?>

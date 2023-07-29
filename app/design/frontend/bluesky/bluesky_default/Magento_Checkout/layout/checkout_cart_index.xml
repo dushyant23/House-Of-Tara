@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="cart.summary">
+            <container name="cart.bottom"  htmlTag="div" htmlClass="cart-bottom" after="checkout.cart.shipping">
+                <container name="free.shipping"  htmlTag="div" htmlClass="free-ship-calculated" before="-">
+                    <block class="Magento\Framework\View\Element\Template" name="checkout.cart.threshold" template="Blueskytechco_AjaxSuite::cart/threshold.phtml" before="-"/>
+                </container>
+                <container name="cart.summary.right"  htmlTag="div" htmlClass="cart-summary-right" after="-"/>
+            </container>
+        </referenceContainer>
+        <move element="checkout.cart.totals.container" destination="cart.summary.right" before="-"/>
+        <move element="checkout.cart.coupon" destination="free.shipping" before="checkout.cart.threshold"/>
+        <move element="checkout.cart.methods.bottom" destination="cart.summary.right" after="-"/>
+    </body>
+</page>

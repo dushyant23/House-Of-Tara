@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body> 
+	    <referenceBlock name="page.main.title" display="false">
+               <action method="setPageTitle">
+                  <argument translate="true" name="title" xsi:type="string" >Contact</argument>
+               </action>
+         </referenceBlock> 
+
+        <referenceContainer name="content">
+			
+			<container name="contact.content" htmlTag="div" htmlClass="row gx-5 contact-us">
+				<container name="form.additional" htmlTag="div" htmlClass="col-md-6">
+				</container>
+				<container name="contact.Infor" htmlTag="div" htmlClass="col-md-6" before="form.additional">
+					<block name="contactInfor" after="contactForm" class="Magento\Cms\Block\Block">    
+						<arguments>
+							<argument name="block_id" xsi:type="string">default_contact_infor</argument>
+						</arguments>
+					</block>
+				</container> 
+			</container>
+        </referenceContainer>
+		<move element="contactForm" destination="form.additional" after="-" />
+    </body>
+</page>
+
+

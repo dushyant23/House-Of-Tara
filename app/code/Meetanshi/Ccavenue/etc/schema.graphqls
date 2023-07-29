@@ -1,0 +1,25 @@
+type Mutation {
+    ccavanuePayment(input: CcavenueInput!): CcavenueOutput @resolver(class: "\\Meetanshi\\Ccavenue\\Model\\Resolver\\CcavenueUrl") @doc(description:"Ccavenue Payment")
+    ccavanueComplete(input: CcavenueCompleteInput!): CcavenueCompleteOutput @resolver(class: "\\Meetanshi\\Ccavenue\\Model\\Resolver\\CcavenueComplete") @doc(description:"Ccavenue Payment Return")
+}
+
+input CcavenueInput {
+    order_increment_id: String @doc(description: "Order Increment Id")
+    callBackUrl: String @doc(description: "Callback Url")
+}
+
+type CcavenueOutput {
+   success: String @doc(description: "Success true/false")
+   gatewayurl: String @doc(description: "gateway url")
+   encRequest: String @doc(description: "encryption request")
+   access_code: String @doc(description: "access code")
+}
+
+input CcavenueCompleteInput {
+    orderNo: String @doc(description: "order number")
+    encResp: String @doc(description: "Reference from ccavanue responce")
+}
+type CcavenueCompleteOutput {
+   success: String @doc(description: "Success true/false")
+   order_id: String @doc(description: "Order Id")
+}

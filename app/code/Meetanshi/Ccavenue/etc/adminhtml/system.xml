@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="ccavenue" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>CCAvenue Payment - Meetanshi</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="show_logo" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Show CCAvenue Logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show CCAvenue Logo on Checkout Page</comment>
+                </field>
+                <field id="mode" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Sandbox Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="sandbox_merchant_id" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Merchant ID</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="mode">1</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="live_merchant_id" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Merchant ID</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="mode">0</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="sandbox_access_code" translate="label" type="obscure" sortOrder="70" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Access Code</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="mode">1</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="live_access_code" translate="label" type="obscure" sortOrder="80" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Access Code</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="mode">0</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="sandbox_encryption_key" translate="label" type="obscure" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Encryption Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="mode">1</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="live_encryption_key" translate="label" type="obscure" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Encryption Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="mode">0</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="sandbox_gateway_url" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <validate>required-entry</validate>
+                    <label>Gateway URL</label>
+                    <depends>
+                        <field id="mode">1</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="live_gateway_url" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <validate>required-entry</validate>
+                    <label>Gateway URL</label>
+                    <depends>
+                        <field id="mode">0</field>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="debug" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Enable debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow_invoice" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1"
+                       showInStore="0" canRestore="1">
+                    <label>Allow Auto Invoice</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>
+                <field id="min_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Minimum Order Total</label>
+                </field>
+                <field id="max_order_total" translate="label" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Maximum Order Total</label>
+                </field>
+                <field id="instructions" translate="label" type="textarea" sortOrder="190" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Additional Information</label>
+                    <comment>This will be shown on Checkout page.</comment>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

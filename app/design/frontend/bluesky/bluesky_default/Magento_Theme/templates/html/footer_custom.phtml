@@ -1,0 +1,61 @@
+<?php 
+	$imageUrl = '';
+	if($this->helper('Blueskytechco\Themeoption\Helper\Themeconfig')->getFooterLogo()){
+		$imageUrl = $this->helper('Blueskytechco\Themeoption\Helper\Themeconfig')->getFooterLogo();
+	}
+?>
+<div id="back-top" class=""></div>
+<div class="footer-container">
+	<div class="footer-top">
+		<div class="footer content">
+			<div class="container-inner">
+				<div class="footer-static_link flex-layout space-between">
+					<div class="footer-links not-collapse-mobile">
+						<?php if($imageUrl){  ?>
+							<img src="<?php echo $imageUrl ?>" alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"/>
+						<?php }else{ ?>
+							<?php echo $this->getChildHtml('logo_footer'); ?>
+						<?php } ?>
+						<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_static_text')->toHtml(); ?>
+					</div>
+					<div class="footer-links">
+						<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_information')->toHtml(); ?>
+					</div>
+					<div class="footer-links">
+						<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_support')->toHtml(); ?>
+					</div>
+					<div class="footer-links">
+						<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_get_in_touch')->toHtml(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom">
+		<div class="footer content">
+			<div class="container-inner">
+				<div class="row">
+					<div class="col-sm-6">
+						<?php echo $this->getChildHtml("copyright"); ?>
+					</div>
+					<div class="col-sm-6">
+						<div class="hozital-menu">
+							<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_bottom_link')->toHtml(); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+<div class="fixed-bottom d-block d-md-none">
+	<div class="link-on-bottom">
+		<ul class="mobile-bottom-link flex-layout space-between list-unstyled">
+			<li><a href="<?php echo $this->getUrl('');?>"><span class="icon main-icon-house"></span><?= $block->escapeHtml(__('Home')) ?></a></li>
+			<li><a href="#" class="toggle-nav-footer"><span class="icon main-icon-menu-1"></span><?= $block->escapeHtml(__('Menu')) ?></a></li>
+			<li><a href="<?php echo $this->getUrl('customer/account/');?>"><span class="icon main-icon-user"></span><?= $block->escapeHtml(__('Account')) ?></a></li>
+			<li><a href="<?php echo $this->getUrl('checkout/cart/');?>"><span class="main-icon-cart"></span><?= $block->escapeHtml(__('Cart')) ?></a></li>
+			
+		</ul>
+	</div>
+</div>

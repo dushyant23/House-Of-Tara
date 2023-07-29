@@ -1,0 +1,45 @@
+<div class="header-container layout-1">
+	<?php if($block->isEnableTopBar()){ ?>
+	<div class="topbar hidden-xs hidden-sticky">
+		<div class="topbar__inner flex-layout space-between topbar__center_section center_vertical center-mobile container_lager">
+			<div class="topbar__section topbar__col-left col-xl-4 col-sm-5 col-top-link flex-layout center_vertical hidden-xxs no-wrap-desktop header__hotline">
+				<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('default_hotline')->toHtml(); ?>
+			</div>
+			<div class="topbar__section topbar__static-text col-xl-4 d-none d-xxl-block">
+				<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('default_header_static_text')->toHtml(); ?> 
+			</div>
+			<div class="topbar__section topbar__col-right col-xl-4 col-sm-7 col-top-link flex-layout center_vertical flex-end">
+				<div class="topbar__locator">
+					<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('default_topbar_link_locator')->toHtml(); ?>
+				</div>
+				<div class="container-setting-language-currency">
+					<?php echo $this->getChildHtml("store_language"); ?>  
+					<?php echo $this->getChildHtml("currency"); ?> 
+				</div>		
+			</div>
+		</div>
+	</div>
+	<?php } ?>
+	<div class="header_middle blueskytechco-header sub-menu-center container_lager sticky-header flex-layout space-between center_vertical flex-nowrap">
+		<div class="header__logo logo-container">
+			<?php echo $this->getChildHtml('logo'); ?>
+		</div>
+		<div class="header__menu text-center">
+			<?php echo $this->getChildHtml("horizontal.menu"); ?>
+		</div>
+		<div class="header__action col-right hidden_text flex-layout flex-end flex-nowrap">
+			<div class="flex-layout center_vertical flex-end flex-nowrap">
+				<?php echo $this->getChildHtml("rokan-search-autocomplete");?>
+				<ul class="flex-layout header__action-default center_vertical no-wrap-desktop">
+					<li class="account-link-header hidden-s">
+						<?php echo $this->getChildHtml("header.links"); ?>
+					</li>
+					<?php echo $block->getLayout()->createBlock('Magento\Wishlist\Block\Link')->setTemplate('Magento_Wishlist::link.phtml')->toHtml();?>
+					<li class="minicart-li-content-show-hide fixed-minicart">
+						<?php echo $this->getChildHtml('minicart'); ?>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

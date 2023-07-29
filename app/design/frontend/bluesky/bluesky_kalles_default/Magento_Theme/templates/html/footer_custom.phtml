@@ -1,0 +1,25 @@
+<?php 
+	$enableMenu = $block->enableMenuMobile();
+	$cms_block = $block->getSettingCmsBlock();
+?>
+<?php if ($block->enableBackToTop()) { ?>
+<div id="back-top" class=""><i class="pr pegk pe-7s-angle-up"></i></div>
+<?php } ?>
+<?php if($cms_block && $cms_block != ''){ ?>
+<div class="footer-container <?php if($enableMenu){ ?>enable-mobile-menu<?php } ?>">
+	<?= $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($cms_block)->toHtml(); ?>
+</div>
+<?php } ?>
+<?php if ($enableMenu) { ?>
+<div class="fixed-bottom d-block d-md-none">
+	<div class="link-on-bottom">
+		<ul class="mobile-bottom-link flex-layout space-between list-unstyled no-wrap">
+			<li><a href="<?= $this->getUrl('');?>"><span class="la la-home"></span><?= $block->escapeHtml(__('Home')) ?></a></li>
+			<li><a href="<?= $this->getUrl('customer/account/');?>"><span class="iccl iccl-user"></span><?= $block->escapeHtml(__('Account')) ?></a></li>
+			<li><a href="#" class="toggle-nav-footer"><span class="iccl iccl-menu"></span><?= $block->escapeHtml(__('Menu')) ?></a></li>
+			<li><a href="<?= $this->getUrl('wishlist');?>"><span class="iccl iccl-heart"></span><?= $block->escapeHtml(__('Wishlist')) ?></a></li>
+			<li><a class="link-cart-bottom" href="javascript:void(0);"><span class="iccl iccl-cart"></span><?= $block->escapeHtml(__('Cart')) ?><span class="count">0</span></a></li>
+		</ul>
+	</div>
+</div>
+<?php } ?>

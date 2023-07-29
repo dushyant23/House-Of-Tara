@@ -1,0 +1,54 @@
+<?php 
+?>
+
+
+<div class="row singleProductRestInfo" id="element">
+                <div class="accordion" id="accordionTara">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="productHighlight" data-role="collapsible">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-role="trigger" data-bs-target="#collapseHighlight" aria-expanded="true" aria-controls="collapseHighlight">
+                                Product Highlights
+                            </button>
+                        </h2>
+                        <div id="collapseHighlight" data-role="content" class="accordion-collapse collapse show" aria-labelledby="productHighlight" data-bs-parent="#accordionTara">
+                            <div class="accordion-body" >
+                                Content will come here
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="productDetail"  data-role="collapsible">
+                            <button class="accordion-button collapsed" type="button" data-role="trigger" data-bs-toggle="collapse" data-bs-target="#collapseDetail" aria-expanded="false" aria-controls="collapseDetail">
+                                Product Details
+                            </button>
+                        </h2>
+                        <div id="collapseDetail" data-role="content" class="accordion-collapse collapse" aria-labelledby="productDetail" data-bs-parent="#accordionTara">
+                            <div class="accordion-body">
+                                Content will come here
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="disclaimer"  data-role="collapsible">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-role="trigger" data-bs-target="#collapseDisclaimer" aria-expanded="false" aria-controls="collapseDisclaimer">
+                                Disclaimer
+                            </button>
+                        </h2>
+                        <div id="collapseDisclaimer" data-role="content" class="accordion-collapse collapse" aria-labelledby="disclaimer" data-bs-parent="#accordionTara">
+                            <div class="accordion-body">
+                                Content will come here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<script>
+    require([
+        'jquery',
+        'accordion'], function ($) {
+        $("#element").accordion();
+    });
+</script>
+

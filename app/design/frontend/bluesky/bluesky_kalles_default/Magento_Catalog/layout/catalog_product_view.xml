@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<move element="page.main.title" destination="product.info.main" before="-"/> 
+		<move element="product.info.type" destination="product.info.main" before="product.info.stock.sku"/>
+		<move element="product.info.stock.sku" destination="product.info.main" before="product-category"/>
+		<move element="product.info.overview" destination="product.info.main" after="product.rate.price"/>
+		<move element="product.info.review" destination="product.info.main" before="product.rate.price"/>
+		<move element="sizechart.popup" destination="extra.popup.link" before="product.delivery"/>
+		<referenceContainer name="product.info.main">
+			<!-- <container name="trust.Seal" htmlTag="div" htmlClass="trust_seal" after="product.info.extrahint">
+				<block name="trustSeal" before="contactForm" class="Magento\Cms\Block\Block">    
+					<arguments>
+						<argument name="block_id" xsi:type="string">bluesky_default_trust_seal</argument>
+					</arguments>
+				</block>
+			</container> -->
+            <container name="extra.popup.link" htmlTag="div" htmlClass="extra-popup" after="trust.Seal">
+                <block class="Magento\Catalog\Block\Product\View" name="product.delivery" template="product/view/delivery.phtml">
+				</block>
+            </container>
+			<container name="product.rate.price" htmlTag="div" htmlClass="product-rate-price singleProductPrice" before="product.info"/>
+			<!-- <container name="product-category" htmlTag="div" htmlClass="product-category">
+				<block class="Magento\Catalog\Block\Product\View" name="product.category.name" template="product/view/productscategory.phtml">
+				</block>
+			</container> -->
+		</referenceContainer>
+		
+		<move element="product.info.price" destination="product.rate.price" before="-"/>
+		<referenceBlock name="product.info.configurable.catalog_inventory_stockqty_default" remove="true"/>
+		<move element="customize.button" destination="product.info.main" after="product.info.overview"/>
+        
+        <move element="product.question.ask" destination="extra.popup.link" after="product.delivery"/>
+	</body>
+</page>
